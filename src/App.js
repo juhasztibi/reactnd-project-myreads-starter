@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
+import Search from './components/Search';
+import BookList from './components/BookList';
 import './App.css';
-import BookList from './BookList';
-import { Link } from 'react-router-dom';
-import Search from './Search';
 
 class BooksApp extends Component {
   

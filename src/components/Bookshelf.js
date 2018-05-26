@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Book from './Book';
 
-class Bookshelf extends Component {
-  render() {
+class BookShelf extends Component {
 
-    const {shelfTitle, books} = this.props;
+  render() {
+    const { books, updateShelf } = this.props;
 
     return (
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{shelfTitle}</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            {books && books.length ?
-              books.map((book, index) => {
-                <Book key={index} title={book.title} authors={book.authors} />
-              }) :
-              <div className="bookshelf--isEmpty">No books here</div>
-            }
-          </ol>
-        </div>
-      </div>
+      <ol className="books-grid">
+        {books.map((book) => (
+          <Book
+            book={book}
+            books={books}
+            key={book.id}
+            updateShelf={updateShelf}
+          />
+        ))}
+      </ol>
     )
   }
+
 }
 
-export default Bookshelf;
+BookShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
+}
+
+export default BookShelf;

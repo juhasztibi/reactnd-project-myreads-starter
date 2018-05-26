@@ -1,46 +1,43 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import SwitchShelf from './SwitchShelf';
 
 class Book extends Component {
 
-	constructor() {
-		super();
+  render() {
 
-		this.state = {
-			self: null
-		}
-	}
+    const { book, books, updateShelf } = this.props;
+    const coverImg = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : "";
+    const title = book.title ? book.title : "No title available";
 
-	render() {
+    return (
+      <li>
+        <div className="book">
+          <div className="book-top">
+            <div
+              className="book-cover"
+              style={{ backgroundImage: `url(${coverImg})`}}>
+            </div>
+            <SwitchShelf
+              book={book}
+              books={books}
+              updateShelf={updateShelf}
+            />
+          </div>
+          <div className="book-title">{ title }</div>
+          {book.authors && book.authors.map((author, index) => (
+            <div className="book-authors" key={index}>{author}</div>
+          ))}
+        </div>
+      </li>
+    )
+  }
+}
 
-		const {title, authors, image} = this.props;
-
-		return (
-			<div className="book">
-				<div className="book-top">
-					{image ?
-						<div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${image}")` }}></div>
-					: null }
-					<div className="book-shelf-changer">
-						<select>
-							<option value="none" disabled>Move to...</option>
-							<option value="currentlyReading">Currently Reading</option>
-							<option value="wantToRead">Want to Read</option>
-							<option value="read">Read</option>
-							<option value="none">None</option>
-						</select>
-					</div>
-				</div>
-				<div className="book-title">{title}</div>
-				<div className="book-authors">
-					{authors && authors.length ?
-						authors.map((author, index) => {
-							return <div key={index}>{author}</div>
-						}) : null
-					}
-				</div>
-			</div>
-		)
-	}
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  books: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
 }
 
 export default Book;
