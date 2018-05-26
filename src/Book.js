@@ -6,8 +6,6 @@ class Book extends Component {
 
   render() {
 
-    console.log(this.props)
-
     const { book, books, updateShelf } = this.props;
     const coverImg = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : "";
     const title = book.title ? book.title : "No title available";
