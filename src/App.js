@@ -6,7 +6,7 @@ import BookList from './components/BookList';
 import './App.css';
 
 class BooksApp extends Component {
-  
+
   constructor() {
     super();
     this.state = {
@@ -39,8 +39,9 @@ class BooksApp extends Component {
       <div className="app">
         <Route path="/search" render={({ history }) => (
           <Search
-            books={ books }
+            books={books}
             updateShelf={this.updateShelf}
+            searchLimit={20}
           />
         )} />
         <Route exact path="/" render={() => (
