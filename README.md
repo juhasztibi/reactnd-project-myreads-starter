@@ -24,7 +24,7 @@ If the application doesn't open in your browser automatically, then use the foll
 
 * [create-react-app](https://github.com/facebook/create-react-app) - react app starter kit
 
-## Authors
+## Author
 
 * **Tibor Juhasz**
 
