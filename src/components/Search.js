@@ -11,7 +11,7 @@ class Search extends Component {
     this.state = {
       query: '',
       newBooks: [],
-      searchErr: false
+      searchError: false
     }
 
     this.getBooks = this.getBooks.bind(this);
@@ -19,23 +19,25 @@ class Search extends Component {
 
   getBooks = (event) => {
 
-    const query = event.target.value.trim();
-    
-    if (query) {
+    const searchQuery = event.target.value.trim();
 
-      this.setState({ query: query })
+    if (searchQuery) {
+      this.setState({ query: searchQuery })
 
-      BooksAPI.search(query, 20).then((books) => {
-        books.length > 0 ? this.setState({newBooks: books, searchErr: false }) : this.setState({ newBooks: [], searchErr: true });
-      });
+      BooksAPI.search(searchQuery, 20).then((books) => books.length > 0 ? this.setState({newBooks: books, searchError: false }) : this.setState({ newBooks: [], searchError: true }));
+
     } else {
-      this.setState({newBooks: [], searchErr: false });
+      this.setState({
+        newBooks: [],
+        searchError: false,
+        query: ''
+      });
     }
   }
 
   render() {
 
-    const { query, newBooks, searchErr } = this.state;
+    const { query, newBooks, searchError } = this.state;
     const { books, updateShelf } = this.props;
 
       return (
@@ -67,7 +69,7 @@ class Search extends Component {
                 </ol>
               </div>
             )}
-            { searchErr  && (
+            { searchError  && (
               <div>
                 <div className=''>
                   <h3>Search returned 0 books. Please try again!</h3>
